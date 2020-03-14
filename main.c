@@ -303,7 +303,7 @@ uco=Lc->uold;
 for (ic=1;ic<=iic-1;ic++)
   for (jc=1;jc<=jjc-1;jc++)
 	  for (nc=1;nc<=kkc-1;nc++)
-		uc[ic][jc][nc]=0.015625*(4*(u[2*ic-1][2*jc+1][2*nc-1]+u[2*ic-1][2*jc+1][2*nc+1]+u[2*ic-1][2*jc-1][2*nc-1]+u[2*ic-1][2*jc-1][2*nc+1]+
+		uc[ic][jc][nc]=0.015625*(4.0*(u[2*ic-1][2*jc+1][2*nc-1]+u[2*ic-1][2*jc+1][2*nc+1]+u[2*ic-1][2*jc-1][2*nc-1]+u[2*ic-1][2*jc-1][2*nc+1]+
                                  u[2*ic+1][2*jc-1][2*nc-1]+u[2*ic+1][2*jc-1][2*nc+1]+u[2*ic+1][2*jc+1][2*nc-1]+u[2*ic+1][2*jc+1][2*nc+1])+
                             1.0*(u[2*ic-1][2*jc][2*nc-1]+u[2*ic+1][2*jc][2*nc-1]+u[2*ic][2*jc-1][2*nc-1]+u[2*ic][2*jc+1][2*nc-1]+
 							     u[2*ic-1][2*jc][2*nc  ]+u[2*ic+1][2*jc][2*nc  ]+u[2*ic][2*jc-1][2*nc  ]+u[2*ic][2*jc+1][2*nc  ]+
