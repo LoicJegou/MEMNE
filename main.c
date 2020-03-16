@@ -357,40 +357,41 @@ for (ic=1;ic<=iic-1;ic++)
 	  for (nc=1;nc<=kkc-1;nc++)
 		{
 		rooo=(f[2*ic][2*jc][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc,2*nc));
-		ropo=(f[2*ic+1][2*jc][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc,2*nc));
-		romo=(f[2*ic-1][2*jc][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc,2*nc));
-		rpoo=(f[2*ic][2*jc+1][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc+1,2*nc));
-		rmoo=(f[2*ic][2*jc-1][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc-1,2*nc));
+		rpoo=(f[2*ic+1][2*jc][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc,2*nc));
+		rmoo=(f[2*ic-1][2*jc][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc,2*nc));
+		ropo=(f[2*ic][2*jc+1][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc+1,2*nc));
+		romo=(f[2*ic][2*jc-1][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc-1,2*nc));
 		rmmo=(f[2*ic-1][2*jc-1][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc-1,2*nc));
-		rmpo=(f[2*ic+1][2*jc-1][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc-1,2*nc));
-		rpmo=(f[2*ic-1][2*jc+1][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc+1,2*nc));
+		rpmo=(f[2*ic+1][2*jc-1][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc-1,2*nc));
+		rmpo=(f[2*ic-1][2*jc+1][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc+1,2*nc));
 		rppo=(f[2*ic+1][2*jc+1][2*nc] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc+1,2*nc));
 		roop=(f[2*ic][2*jc][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc,2*nc+1));
-		ropp=(f[2*ic+1][2*jc][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc,2*nc+1));
-		romp=(f[2*ic-1][2*jc][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc,2*nc+1));
-		rpop=(f[2*ic][2*jc+1][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc+1,2*nc+1));
-        rmop=(f[2*ic][2*jc-1][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc-1,2*nc+1));
+		rpop=(f[2*ic+1][2*jc][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc,2*nc+1));
+		rmop=(f[2*ic-1][2*jc][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc,2*nc+1));
+		ropp=(f[2*ic][2*jc+1][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc+1,2*nc+1));
+        romp=(f[2*ic][2*jc-1][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc-1,2*nc+1));
         rmmp=(f[2*ic-1][2*jc-1][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc-1,2*nc+1));
-        rmpp=(f[2*ic+1][2*jc-1][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc-1,2*nc+1));
-        rpmp=(f[2*ic-1][2*jc+1][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc+1,2*nc+1));
+        rpmp=(f[2*ic+1][2*jc-1][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc-1,2*nc+1));
+        rmpp=(f[2*ic-1][2*jc+1][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc+1,2*nc+1));
         rppp=(f[2*ic+1][2*jc+1][2*nc+1] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc+1,2*nc+1));
         room=(f[2*ic][2*jc][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc,2*nc-1));
-        ropm=(f[2*ic+1][2*jc][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc,2*nc-1));
-        romm=(f[2*ic-1][2*jc][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc,2*nc-1));
-        rpom=(f[2*ic][2*jc+1][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc+1,2*nc-1));
-        rmom=(f[2*ic][2*jc-1][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc-1,2*nc-1));
+        rpom=(f[2*ic+1][2*jc][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc,2*nc-1));
+        rmom=(f[2*ic-1][2*jc][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc,2*nc-1));
+        ropm=(f[2*ic][2*jc+1][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc+1,2*nc-1));
+        romm=(f[2*ic][2*jc-1][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic,2*jc-1,2*nc-1));
         rmmm=(f[2*ic-1][2*jc-1][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc-1,2*nc-1));
-        rmpm=(f[2*ic+1][2*jc-1][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc-1,2*nc-1));
-        rpmm=(f[2*ic-1][2*jc+1][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc+1,2*nc-1));
+        rpmm=(f[2*ic+1][2*jc-1][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc-1,2*nc-1));
+        rmpm=(f[2*ic-1][2*jc+1][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic-1,2*jc+1,2*nc-1));
         rppm=(f[2*ic+1][2*jc+1][2*nc-1] -Lu(u,rh2x,rh2y,rh2z,2*ic+1,2*jc+1,2*nc-1));
 
     /* FAS coarse grid right hand side   */
     /* with full weighting of residuals  */
 
-    fc[ic][jc][nc]=Lu(uc,rh2xc,rh2yc,ic,jc,nc)+
-                   0.0625*(rne+rse+rsw+rnw    +
-                   2.0*(rn+re+rs+rw)          +
-                   16*rooo);
+    fc[ic][jc][nc]=Lu(uc,rh2xc,rh2yc,rh2zc,ic,jc,nc)+
+                  0.015625*(1.0*(rmom+rpom+romm+ropm+rmoo+rpoo+romo+ropo+rmop+rpop+romp+ropp)+
+                  4.0*(rmpm+rmpp+rmmm+rmmp+rpmm+rpmp+rppm+rppp)+
+                  8.0*(rpoo+rmoo+romo+ropo+roop+room)+
+                  16.0*(rooo));
     }
 }
 
@@ -400,34 +401,35 @@ void refine(Stack *U, int k)
 /* Interpolation and addition of coarse grid correction from grid k-1 */
 /* to grid k                                                          */
 
-int     ic,jc,iic,jjc;
+int     ic,jc,nc,iic,jjc,kkc;
 Level  *Lc,*L;
-double **uc,**uco,**u;
+double ***uc,***uco,***u;
 
 L  =U->Lk+k;
 u  =L->u  ;
 
 Lc =U->Lk+k-1;
-iic=Lc->ii; jjc=Lc->jj;
+iic=Lc->ii; jjc=Lc->jj; kkc=Lc->kk;
 uc =Lc->u ;
 uco=Lc->uold ;
 
 for (ic=1;ic<=iic;ic++)
   for (jc=1;jc<=jjc;jc++)
-    {
-    if (ic<iic) u[2*ic  ][2*jc  ]+=(uc[ic][jc]-uco[ic][jc]);
+    for (nc=1;nc<=kkc;nc++)
+        {
+        if (ic<iic) u[2*ic  ][2*jc  ]+=(uc[ic][jc]-uco[ic][jc]);
 
-    if (jc<jjc) u[2*ic-1][2*jc  ]+=(uc[ic  ][jc]-uco[ic  ][jc]+
-                                    uc[ic-1][jc]-uco[ic-1][jc])*0.5;
+        if (jc<jjc) u[2*ic-1][2*jc  ]+=(uc[ic  ][jc]-uco[ic  ][jc]+
+                                        uc[ic-1][jc]-uco[ic-1][jc])*0.5;
 
-    if (ic<iic) u[2*ic  ][2*jc-1]+=(uc[ic][jc  ]-uco[ic][jc  ]+
-                                    uc[ic][jc-1]-uco[ic][jc-1])*0.5;
+        if (ic<iic) u[2*ic  ][2*jc-1]+=(uc[ic][jc  ]-uco[ic][jc  ]+
+                                        uc[ic][jc-1]-uco[ic][jc-1])*0.5;
 
-    u[2*ic-1][2*jc-1]+=(uc[ic  ][jc  ]-uco[ic  ][jc  ]+
-                        uc[ic  ][jc-1]-uco[ic  ][jc-1]+
-                        uc[ic-1][jc  ]-uco[ic-1][jc  ]+
-                        uc[ic-1][jc-1]-uco[ic-1][jc-1])*0.25;
-    }
+        u[2*ic-1][2*jc-1]+=(uc[ic  ][jc  ]-uco[ic  ][jc  ]+
+                            uc[ic  ][jc-1]-uco[ic  ][jc-1]+
+                            uc[ic-1][jc  ]-uco[ic-1][jc  ]+
+                            uc[ic-1][jc-1]-uco[ic-1][jc-1])*0.25;
+        }
 }
 
 
@@ -436,16 +438,16 @@ void fmg_interpolate(Stack *U, int k)
 /* interpolation of coarse grid k-1 solution to fine grid k */
 /* to serve as first approximation. bi-cubic interpolation  */
 
-int    ic,jc,iic,jjc,i,j,ii,jj;
+int    ic,jc,nc,iic,jjc,kkc,i,j,n,ii,jj,kk;
 Level  *Lc,*L;
-double **uc,**u, **uconv;
+double ***uc,***u, ***uconv;
 
 L  =U->Lk+k;
-ii =L ->ii; jj =L->jj;
+ii =L ->ii; jj =L->jj; kk=L->kkc;
 u  =L->u  ;
 
 Lc    =U->Lk+k-1;
-iic   =Lc->ii; jjc=Lc->jj;
+iic   =Lc->ii; jjc=Lc->jj; kkc=Lc->kk;
 uc    =Lc->u ;
 uconv =Lc->uconv;
 
@@ -454,13 +456,15 @@ uconv =Lc->uconv;
 
 for (ic=1;ic<=iic-1;ic++)
   for (jc=1;jc<=jjc-1;jc++)
-    uconv[ic][jc]=uc[ic][jc];
+    for (nc=1;nc<=kkc-1;nc++)
+        uconv[ic][jc][nc]=uc[ic][jc][nc];
 
 /* first inject to points coinciding with coarse grid points */
 
 for (ic=1;ic<=iic-1;ic++)
   for (jc=1;jc<=jjc-1;jc++)
-    u[2*ic][2*jc]=uc[ic][jc];
+    for (nc=1;nc<=kkc-1;nc++)
+        u[2*ic][2*jc][2*nc]=uc[ic][jc][nc];
 
 /* interpolate intermediate y direction */
 
@@ -493,9 +497,9 @@ double conver(Stack *U, int k)
 /* convergence check using converged solutions on level k */
 /* and on next coarser grid k-1                           */
 
-int    ic,jc;
+int    ic,jc,nc;
 Level  *Lc,*L;
-double **uc,**u;
+double ***uc,***u;
 double err;
 
 L =U->Lk+k;
@@ -509,9 +513,10 @@ uc =Lc->uconv;
 err=0.0;
 for (ic=1;ic<=Lc->ii-1;ic++)
   for (jc=1;jc<=Lc->jj-1;jc++)
-  err+=fabs(uc[ic][jc]-u[2*ic][2*jc]);
+    for (nc=1;nc<=Lc->kk-1;nc++)
+        err+=fabs(uc[ic][jc][nc]-u[2*ic][2*jc][2*nc]);
 
-return(err/((Lc->ii-1)*(Lc->jj-1)));
+return(err/((Lc->ii-1)*(Lc->jj-1)*(Lc->kk-1)));
 }
 
 
@@ -526,7 +531,7 @@ void cycle(Stack *U, int k, int nu0, int nu1, int nu2, int gamma)
 /* gamma=2 for Wcycle                                        */
 
 {
-int i,j;
+int i,j,n;
 
 if (k==1)
   for (i=1;i<=nu0;i++) relax(U,k);
