@@ -417,18 +417,38 @@ for (ic=1;ic<=iic;ic++)
   for (jc=1;jc<=jjc;jc++)
     for (nc=1;nc<=kkc;nc++)
         {
-        if (ic<iic) u[2*ic  ][2*jc  ]+=(uc[ic][jc]-uco[ic][jc]);
+        if (ic<iic) u[2*ic  ][2*jc-1][2*nc  ]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]+
+                                                uc[ic  ][jc-1][nc  ]-uco[ic  ][jc-1][nc  ])*0.5;
 
-        if (jc<jjc) u[2*ic-1][2*jc  ]+=(uc[ic  ][jc]-uco[ic  ][jc]+
-                                        uc[ic-1][jc]-uco[ic-1][jc])*0.5;
+        if (ic<iic) u[2*ic  ][2*jc  ][2*nc-1]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]+
+                                                uc[ic  ][jc  ][nc-1]-uco[ic  ][jc  ][nc-1])*0.5;
 
-        if (ic<iic) u[2*ic  ][2*jc-1]+=(uc[ic][jc  ]-uco[ic][jc  ]+
-                                        uc[ic][jc-1]-uco[ic][jc-1])*0.5;
+        if (ic<iic) u[2*ic  ][2*jc-1][2*nc-1]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]+
+                                                uc[ic  ][jc-1][nc  ]-uco[ic  ][jc-1][nc  ]+
+                                                uc[ic  ][jc  ][nc-1]-uco[ic  ][jc  ][nc-1]+
+                                                uc[ic  ][jc-1][nc-1]-uco[ic  ][jc-1][nc-1]+)*0.25;
 
-        u[2*ic-1][2*jc-1]+=(uc[ic  ][jc  ]-uco[ic  ][jc  ]+
-                            uc[ic  ][jc-1]-uco[ic  ][jc-1]+
-                            uc[ic-1][jc  ]-uco[ic-1][jc  ]+
-                            uc[ic-1][jc-1]-uco[ic-1][jc-1])*0.25;
+        if (jc<jjc) u[2*ic-1][2*jc  ][2*nc  ]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]+
+                                                uc[ic-1][jc  ][nc  ]-uco[ic-1][jc  ][nc  ])*0.5;
+
+        if (jc<jjc) u[2*ic-1][2*jc  ][2*nc-1]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]+
+                                                uc[ic-1][jc  ][nc  ]-uco[ic-1][jc  ][nc  ]+
+                                                uc[ic  ][jc  ][nc-1]-uco[ic  ][jc  ][nc-1]+
+                                                uc[ic-1][jc  ][nc-1]-uco[ic-1][jc  ][nc-1]+)*0.25;
+
+        if (nc<kkc) u[2*ic-1][2*jc-1][2*nc  ]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]+
+                                                uc[ic-1][jc  ][nc  ]-uco[ic-1][jc  ][nc  ]+
+                                                uc[ic  ][jc-1][nc  ]-uco[ic  ][jc-1][nc  ]+
+                                                uc[ic-1][jc-1][nc  ]-uco[ic-1][jc-1][nc  ]+)*0.25;
+
+        u[2*ic-1][2*jc-1][2*nc-1]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]+
+                                    uc[ic-1][jc  ][nc  ]-uco[ic-1][jc  ][nc  ]+
+                                    uc[ic-1][jc-1][nc  ]-uco[ic-1][jc-1][nc  ]+
+                                    uc[ic-1][jc-1][nc-1]-uco[ic-1][jc-1][nc-1]+
+                                    uc[ic  ][jc-1][nc  ]-uco[ic  ][jc-1][nc  ]+
+                                    uc[ic  ][jc-1][nc-1]-uco[ic  ][jc-1][nc-1]+
+                                    uc[ic  ][jc  ][nc-1]-uco[ic  ][jc  ][nc-1]+
+                                    uc[ic-1][jc  ][nc-1]-uco[ic  ][jc  ][nc-1}+)*0.125;
         }
 }
 
