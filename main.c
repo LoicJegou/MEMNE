@@ -463,7 +463,7 @@ Level  *Lc,*L;
 double ***uc,***u, ***uconv;
 
 L  =U->Lk+k;
-ii =L ->ii; jj =L->jj; kk=L->kkc;
+ii =L ->ii; jj =L->jj; kk=L->kk;
 u  =L->u  ;
 
 Lc    =U->Lk+k-1;
@@ -509,8 +509,19 @@ for (j=1;j<=jj-1;j++)
 
   u[ii-1][j]=(5.0*u[ii][j]+15.0*u[ii-2][j]-5.0*u[ii-4][j]+u[ii-6][j])*0.0625;
   }
-}
 
+  /* interpolate in z direction */
+
+for (j=1;j<=jj-1;j++)
+  {
+  u[1][j]=(5.0*u[0][j]+15.0*u[2][j]-5.0*u[4][j]+u[6][j])*0.0625;
+
+  for (i=3;i<=ii-3;i+=2)
+    u[i][j]=(-u[i-3][j]+9.0*u[i-1][j]+9.0*u[i+1][j]-u[i+3][j])*0.0625;
+
+  u[ii-1][j]=(5.0*u[ii][j]+15.0*u[ii-2][j]-5.0*u[ii-4][j]+u[ii-6][j])*0.0625;
+  }
+}
 
 double conver(Stack *U, int k)
 {
