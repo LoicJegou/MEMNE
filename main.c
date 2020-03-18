@@ -91,10 +91,10 @@ for (i=1;i<=maxlevel;i++)
   L->ii=ii;
   L->jj=jj;
   L->kk=kk;
-  L->f    =matrix(ii,jj,kk);
-  L->u    =matrix(ii,jj,kk);
-  L->uold =matrix(ii,jj,kk);
-  L->uconv=matrix(ii,jj,kk);
+  L->f    =matrix3(ii,jj,kk);
+  L->u    =matrix3(ii,jj,kk);
+  L->uold =matrix3(ii,jj,kk);
+  L->uconv=matrix3(ii,jj,kk);
   if (i==maxlevel) printf("\n level%2d ii=%4d jj=%4d\n",i,ii,jj,kk);
   if ((L->f==NULL)||(L->u==NULL)||(L->uold==NULL)||(L->uconv==NULL))
     {
@@ -210,6 +210,7 @@ for (i=0;i<=ii;i++)
     }
   }
 }
+}
 
 
 void relax(Stack *U, int k)
@@ -275,6 +276,7 @@ for (i=1;i<=L->ii-1;i++)
 	z=U->za+n*L->hz;
     err+=fabs(u[i][j][n]-U_a(x,y,z));
     }
+  }
   }
 return(err/((L->ii-1)*(L->jj-1)*(L->kk-1)));
 }
@@ -620,7 +622,7 @@ int j,maxlev,ncy;
 printf("\ngive maxlevel"); scanf("%d",&maxlev);
 printf("\ngive ncy     "); scanf("%d",&ncy);
 
-initialize(&U,4,4,maxlev,0.0,1.0,0.0,1.0);
+initialize(&U,4,4,4,maxlev,0.0,1.0,0.0,1.0,0.0,1.0);
 
 for (j=maxlev;j>=1;j--) init_uf(&U, U_i, U_b, F_i, j);
 
