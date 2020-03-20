@@ -622,7 +622,7 @@ int j,maxlev,ncy;
 printf("\ngive maxlevel"); scanf("%d",&maxlev);
 printf("\ngive ncy     "); scanf("%d",&ncy);
 
-initialize(&U,4,4,4,maxlev,0.0,1.0,0.0,1.0,0.0,1.0);
+initialize(&U,4,4,4,maxlev,-1.0,1.0,-1.0,1.0,-1.0,1.0);
 
 for (j=maxlev;j>=1;j--) init_uf(&U, U_i, U_b, F_i, j);
 
