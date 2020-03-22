@@ -142,9 +142,9 @@ return(sin(2*pi*x)*sin(2*pi*y)*sin(2*pi*z));
 
 double U_b(double x, double y, double z)
 {
-/* take analytical solution as boundary condition */
+/* take boundary condition */
 
-return(sin(2*pi*x)*sin(2*pi*y)*sin(2*pi*z));
+return(1.5-sqrt(x*x+y*y+z*z));
 }
 
 
@@ -202,14 +202,16 @@ for (i=0;i<=ii;i++)
 	for (n=0;n<=kk;n++)
 	 {
 	 z=U->za+n*L->hz;
-    if ((i==0)||(j==0)||(n==0)||(i==ii)||(j==jj)||(n==kk))
-      L->u[i][j][n]=ub(x,y,z);
+    if ((j==1)||(j==-1))
+        if(U_b(x,y,z)<=1.5)
+            L->u[i][j][n]=U_b(x,y,z);
     else
       L->u[i][j][n]=u0(x,y,z);
-    L->f[i][j][n]=f0(x,y,z);
+      L->f[i][j][n]=f0(x,y,z);
     }
   }
 }
+
 }
 
 
@@ -438,7 +440,10 @@ for (ic=1;ic<=iic;ic++)
                                                 uc[ic  ][jc  ][nc-1]-uco[ic  ][jc  ][nc-1]+
                                                 uc[ic-1][jc  ][nc-1]-uco[ic-1][jc  ][nc-1])*0.25;
 
-        if (nc<kkc) u[2*ic-1][2*jc-1][2*nc  ]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]+
+        if (nc<kkc) u[2*ic-1][2*jc-1][2*nc  ]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]);
+
+
+        if (nc<kkc) u[2*ic  ][2*jc  ][2*nc  ]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]+
                                                 uc[ic-1][jc  ][nc  ]-uco[ic-1][jc  ][nc  ]+
                                                 uc[ic  ][jc-1][nc  ]-uco[ic  ][jc-1][nc  ]+
                                                 uc[ic-1][jc-1][nc  ]-uco[ic-1][jc-1][nc  ])*0.25;
@@ -638,4 +643,5 @@ if (maxlev>1)
 
 printf("\n");
 finalize(&U,maxlev);
+
 }
