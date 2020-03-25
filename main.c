@@ -202,9 +202,11 @@ for (i=0;i<=ii;i++)
 	for (n=0;n<=kk;n++)
 	 {
 	 z=U->za+n*L->hz;
-    if ((j==1)||(j==-1))
-        if(U_b(x,y,z)<=1.5)
-            L->u[i][j][n]=U_b(x,y,z);
+    /*if ((j==1)||(j==-1))
+        if(ub(x,y,z)>=0)
+            L->u[i][j][n]=ub(x,y,z);*/
+    if ((i==0)||(j==0)||(n==0)||(i==ii)||(j==jj)||(n==kk))
+      L->u[i][j][n]=ub(x,y,z);
     else
       L->u[i][j][n]=u0(x,y,z);
       L->f[i][j][n]=f0(x,y,z);
@@ -440,10 +442,10 @@ for (ic=1;ic<=iic;ic++)
                                                 uc[ic  ][jc  ][nc-1]-uco[ic  ][jc  ][nc-1]+
                                                 uc[ic-1][jc  ][nc-1]-uco[ic-1][jc  ][nc-1])*0.25;
 
-        if (nc<kkc) u[2*ic-1][2*jc-1][2*nc  ]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]);
+        if (nc<kkc) u[2*ic][2*jc][2*nc  ]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]);
 
 
-        if (nc<kkc) u[2*ic  ][2*jc  ][2*nc  ]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]+
+        if (nc<kkc) u[2*ic-1][2*jc-1][2*nc  ]+=(uc[ic  ][jc  ][nc  ]-uco[ic  ][jc  ][nc  ]+
                                                 uc[ic-1][jc  ][nc  ]-uco[ic-1][jc  ][nc  ]+
                                                 uc[ic  ][jc-1][nc  ]-uco[ic  ][jc-1][nc  ]+
                                                 uc[ic-1][jc-1][nc  ]-uco[ic-1][jc-1][nc  ])*0.25;
@@ -458,7 +460,6 @@ for (ic=1;ic<=iic;ic++)
                                     uc[ic-1][jc  ][nc-1]-uco[ic  ][jc  ][nc-1])*0.125;
         }
 }
-
 
 void fmg_interpolate(Stack *U, int k)
 {
@@ -493,50 +494,42 @@ for (ic=1;ic<=iic-1;ic++)
     for (nc=1;nc<=kkc-1;nc++)
         u[2*ic][2*jc][2*nc]=uc[ic][jc][nc];
 
-/* interpolate intermediate y direction */
+/* interpolate intermediate x direction */
+for (j=2;j<=jj-2;j+=2)
+    for (n=1;n<=kk-1;n++)
+  {
+    u[1][i][n]=(u[0][j][n]+u[2][j][n])*0.5;
 
+    for (i=3;i<=ii-3;i+=2)
+        u[i][j][n]=(u[i-1][j][n]+u[i+1][j][n])*0.5;
+
+    u[ii-1][j][n]=(u[ii][j][n]+u[ii-2][j][n])*0.5;
+   }
+
+/* interpolate in y direction */
 for (i=2;i<=ii-2;i+=2)
+    for (n=1;n<=kk-1;n++)
   {
-  u[i][1][0]=(u[i][0][0]+u[i][2][0])*0.5;
-  u[i][jj-1][0]=(u[i][jj-2][0]+u[i][jj][0])*0.5;
+    u[i][1][n]=(u[i][0][n]+u[i][2][n])*0.5;
 
-  u[i][1][kk]=(u[i][0][kk]+u[i][2][kk])*0.5;
-  u[i][jj-1][kk]=(u[i][jj-2][kk]+u[i][jj][kk])*0.5;
+    for (j=3;j<=jj-3;j+=2)
+        u[i][j][n]=(u[i][j-1][n]+u[i][j+1][n])*0.5;
 
-  for (j=3;j<=jj-3;j+=2)
-    for (n=0;n<=kk;n+=1)
-    u[i][j][n]=(u[i][j-1][n]+u[i][j+1][n])*0.5;
-
-  }
-
-/* interpolate in x direction */
-
-for (j=1;j<=jj-1;j++)
-  {
-  u[1][j][0]=(u[0][j][0]+u[2][j][0])*0.5;
-  u[ii-1][j][0]=(u[ii-2][j][0]+u[ii][j][0])*0.5;
-
-  u[1][j][kk]=(u[0][j][kk]+u[2][j][kk])*0.5;
-  u[ii-1][j][kk]=(u[ii-2][j][kk]+u[ii][j][kk])*0.5;
-
-  for (i=3;i<=ii-3;i+=2)
-    for (n=0;n<=kk;n+=1)
-    u[i][j][n]=(u[i-1][j][n]+u[i+1][j][n])*0.5;
-
+    u[i][jj-1][n]=(u[i][jj][n]+u[i][jj-2][n])*0.5;
    }
 
   /* interpolate in z direction */
-
-for (j=1;j<=jj-1;j++)
+for (i=2;i<=ii-2;i+=2)
+    for (j=1;j<=jj-1;j++)
   {
-  u[0][1][n]=(u[0][0][n]+u[0][2][n])*0.5;
-  u[0][jj-1][n]=(u[0][jj-2][0]+u[0][jj][n])*0.5;
+    u[i][j][1]=(u[i][j][0]+u[i][j][2])*0.5;
+    for (n=3;n<=kk-3;n+=2)
+        u[i][j][n]=(u[i][j][n-1]+u[i][j][n+1])*0.5;
 
-  u[ii][1][n]=(u[ii][0][n]+u[ii][2][n])*0.5;
-  u[ii][jj-1][n]=(u[ii][jj-2][n]+u[ii][jj][n])*0.5;
-
+    u[i][j][kk-1]=(u[i][j][kk]+u[i][j][kk-2])*0.5;
    }
 }
+
 
 double conver(Stack *U, int k)
 {
@@ -624,6 +617,8 @@ int main()
 Stack  U;
 int j,maxlev,ncy;
 
+
+
 printf("\ngive maxlevel"); scanf("%d",&maxlev);
 printf("\ngive ncy     "); scanf("%d",&ncy);
 
@@ -641,7 +636,30 @@ if (maxlev>1)
   for (j=2;j<=maxlev;j++) printf("\naen(%2d,%2d)=%8.5e",j,j-1,conver(&U,j));
   }
 
+
 printf("\n");
+
+Level *L;
+L = U.Lk+maxlev;
+double*** result = L->u;
+int taille = L->ii;
+
+taille *= 0.75;
+printf("\n");
+printf("Resultat pour le point concerne : ");
+printf("%d et ii : %d", L->u[taille][taille][taille], taille);
+printf("\n");
+printf("Resultat final selon x : \n\n");
+for (int i = 0; i<=L->ii;i++) printf("%d\n", L->u[i][L->ii/2][L->ii/2]);
+printf("Resultat final selon y : \n\n");
+for (int i = 0; i<=L->ii;i++) printf("%d\n", L->u[L->ii/2][i][L->ii/2]);
 finalize(&U,maxlev);
 
+/*int columns,rows;
+for(columns=0;columns<=4;columns++){
+    for(rows=0;rows<=4;rows++){
+        printf(" %d " ,matrix3(columns,rows,1));
+    }
+    printf("\n");*/
 }
+
