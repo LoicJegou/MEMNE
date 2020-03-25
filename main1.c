@@ -144,7 +144,7 @@ double U_b(double x, double y, double z)
 {
 /* take boundary condition */
 
-return(sin(2*pi*x)*sin(2*pi*y)*sin(2*pi*z));
+return(1.5-sqrt(x*x+y*y+z*z));
 }
 
 
@@ -495,45 +495,37 @@ for (ic=1;ic<=iic-1;ic++)
         u[2*ic][2*jc][2*nc]=uc[ic][jc][nc];
 
 /* interpolate intermediate x direction */
-for (i=2;i<=ii-2;i+=2)
-  {
-  u[i][1][0]=(u[i][0][0]+u[i][2][0])*0.5;
-  u[i][jj-1][0]=(u[i][jj-2][0]+u[i][jj][0])*0.5;
-
-  u[i][1][kk]=(u[i][0][kk]+u[i][2][kk])*0.5;
-  u[i][jj-1][kk]=(u[i][jj-2][kk]+u[i][jj][kk])*0.5;
-
-  for (j=3;j<=jj-3;j+=2)
+for (j=2;j<=jj-2;j+=2)
     for (n=1;n<=kk-1;n+=1)
-    u[i][j][n]=(u[i][j-1][n]+u[i][j+1][n])*0.5;
-
-  }
-
-/* interpolate in x direction */
-
-for (j=1;j<=jj-1;j++)
   {
-  u[1][j][0]=(u[0][j][0]+u[2][j][0])*0.5;
-  u[ii-1][j][0]=(u[ii-2][j][0]+u[ii][j][0])*0.5;
+    u[1][i][0]=(u[0][j][0]+u[2][j][0])*0.5;
+    u[ii-1][j][0]=(u[ii][j][0]+u[ii-2][j][0])*0.5;
 
-  u[1][j][kk]=(u[0][j][kk]+u[2][j][kk])*0.5;
-  u[ii-1][j][kk]=(u[ii-2][j][kk]+u[ii][j][kk])*0.5;
-
-  for (i=3;i<=ii-3;i+=2)
-    for (n=1;n<=kk-1;n+=1)
-    u[i][j][n]=(u[i-1][j][n]+u[i+1][j][n])*0.5;
+    for (i=3;i<=ii-3;i+=2)
+        u[i][j][n]=(u[i-1][j][n]+u[i+1][j][n])*0.5;
 
    }
 
-  /* interpolate in z direction */
-
-for (j=1;j<=jj-1;j++)
+/* interpolate in y direction */
+for (i=2;i<=ii-2;i+=2)
+    for (n=1;n<=kk-1;n+=1)
   {
-  u[0][1][n]=(u[0][0][n]+u[0][2][n])*0.5;
-  u[0][jj-1][n]=(u[0][jj-2][0]+u[0][jj][n])*0.5;
+    u[i][1][0]=(u[i][0][0]+u[i][2][0])*0.5;
+    u[i][jj-1][0]=(u[i][jj][0]+u[i][jj-2][0])*0.5;
 
-  u[ii][1][n]=(u[ii][0][n]+u[ii][2][n])*0.5;
-  u[ii][jj-1][n]=(u[ii][jj-2][n]+u[ii][jj][n])*0.5;
+    for (j=3;j<=jj-3;j+=2)
+        u[i][j][n]=(u[i][j-1][n]+u[i][j+1][n])*0.5;
+   }
+
+  /* interpolate in z direction */
+for (i=2;i<=ii-2;i+=2)
+    for (j=1;j<=jj-1;j+=1)
+  {
+    u[i][0][1]=(u[i][0][0]+u[i][0][2])*0.5;
+    u[i][0][kk-1]=(u[i][0][kk]+u[i][0][kk-2])*0.5;
+
+    for (n=3;n<=kk-3;n+=2)
+        u[i][j][n]=(u[i][j][n-1]+u[i][j][n+1])*0.5;
 
    }
 }
@@ -646,7 +638,7 @@ if (maxlev>1)
 
 
 printf("\n");
-/*
+
 Level *L;
 L = U.Lk+maxlev;
 double*** result = L->u;
@@ -661,7 +653,7 @@ printf("Resultat final selon x : \n\n");
 for (int i = 0; i<=L->ii;i++) printf("%d\n", L->u[i][L->ii/2][L->ii/2]);
 printf("Resultat final selon y : \n\n");
 for (int i = 0; i<=L->ii;i++) printf("%d\n", L->u[L->ii/2][i][L->ii/2]);
-finalize(&U,maxlev);*/
+finalize(&U,maxlev);
 
 /*int columns,rows;
 for(columns=0;columns<=4;columns++){

@@ -142,7 +142,7 @@ return(sin(2*pi*x)*sin(2*pi*y)*sin(2*pi*z));
 
 double U_b(double x, double y, double z)
 {
-/* take boundary condition */
+/* take analytical solution as boundary condition */
 
 return(sin(2*pi*x)*sin(2*pi*y)*sin(2*pi*z));
 }
@@ -202,9 +202,6 @@ for (i=0;i<=ii;i++)
 	for (n=0;n<=kk;n++)
 	 {
 	 z=U->za+n*L->hz;
-    /*if ((j==1)||(j==-1))
-        if(ub(x,y,z)>=0)
-            L->u[i][j][n]=ub(x,y,z);*/
     if ((i==0)||(j==0)||(n==0)||(i==ii)||(j==jj)||(n==kk))
       L->u[i][j][n]=ub(x,y,z);
     else
@@ -213,7 +210,6 @@ for (i=0;i<=ii;i++)
     }
   }
 }
-
 }
 
 
@@ -625,8 +621,6 @@ int main()
 Stack  U;
 int j,maxlev,ncy;
 
-
-
 printf("\ngive maxlevel"); scanf("%d",&maxlev);
 printf("\ngive ncy     "); scanf("%d",&ncy);
 
@@ -644,30 +638,6 @@ if (maxlev>1)
   for (j=2;j<=maxlev;j++) printf("\naen(%2d,%2d)=%8.5e",j,j-1,conver(&U,j));
   }
 
-
 printf("\n");
-/*
-Level *L;
-L = U.Lk+maxlev;
-double*** result = L->u;
-int taille = L->ii;
-
-taille *= 0.75;
-printf("\n");
-printf("Resultat pour le point concerne : ");
-printf("%d et ii : %d", L->u[taille][taille][taille], taille);
-printf("\n");
-printf("Resultat final selon x : \n\n");
-for (int i = 0; i<=L->ii;i++) printf("%d\n", L->u[i][L->ii/2][L->ii/2]);
-printf("Resultat final selon y : \n\n");
-for (int i = 0; i<=L->ii;i++) printf("%d\n", L->u[L->ii/2][i][L->ii/2]);
-finalize(&U,maxlev);*/
-
-/*int columns,rows;
-for(columns=0;columns<=4;columns++){
-    for(rows=0;rows<=4;rows++){
-        printf(" %d " ,matrix3(columns,rows,1));
-    }
-    printf("\n");*/
+finalize(&U,maxlev);
 }
-
